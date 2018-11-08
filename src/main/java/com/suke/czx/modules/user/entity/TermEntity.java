@@ -28,6 +28,21 @@ public class TermEntity implements Serializable {
 	private Date updatetime;
 	//
 	private Integer iseff;
+	// 非数据库字段
+	private String termtypeCN;
+
+	public String getTermtypeCN() {
+		if(termtype.intValue()==1) {
+			return "面授";
+		}else if(termtype.intValue()==2){
+			return "短训";
+		}
+		return "异常";
+	}
+
+	public void setTermtypeCN(String termtypeCN) {
+		this.termtypeCN = termtypeCN;
+	}
 
 	/**
 	 * 设置：

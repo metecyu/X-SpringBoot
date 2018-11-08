@@ -6,9 +6,7 @@ $(function () {
 			{ label: '编号', name: 'termid', index: 'termid', width: 50, key: true },
 			{ label: '年', name: 'year', index: 'year', width: 80 },
 			{ label: '月', name: 'month', index: 'month', width: 80 },
-			{ label: '类型', name: 'termtype', index: 'termtype', width: 80 },
-			{ label: '', name: 'createtime', index: 'createTime', width: 80 }, 			
-			{ label: '', name: 'updatetime', index: 'updateTime', width: 80 }, 			
+			{ label: '类型', name: 'termtypeCN', index: 'termtype', width: 80 },
 			{ label: '是否有效', name: 'iseff', index: 'iseff', width: 80 }
         ],
 		viewrecords: true,
@@ -52,7 +50,7 @@ var vm = new Vue({
 		add: function(){
 			vm.showList = false;
 			vm.title = "新增";
-			vm.term = {};
+			vm.term = {year:2018,month:1,termtype:1};
 		},
 		update: function (event) {
 			var termid = getSelectedRow();

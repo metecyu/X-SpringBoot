@@ -1,5 +1,6 @@
 package com.suke.czx.modules.user.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -62,6 +63,9 @@ public class TermController {
     @RequestMapping("/save")
     @RequiresPermissions("user:term:save")
     public R save(@RequestBody TermEntity term){
+            term.setCreatetime(new Date());
+            term.setUpdatetime(new Date());
+            term.setIseff(1);
 			termService.save(term);
 
         return R.ok();
@@ -73,6 +77,7 @@ public class TermController {
     @RequestMapping("/update")
     @RequiresPermissions("user:term:update")
     public R update(@RequestBody TermEntity term){
+            term.setUpdatetime(new Date());
 			termService.update(term);
 
         return R.ok();
