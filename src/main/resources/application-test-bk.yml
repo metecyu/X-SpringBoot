@@ -1,12 +1,12 @@
 spring:
     datasource:
         type: com.alibaba.druid.pool.DruidDataSource
-        driverClassName: org.sqlite.JDBC
+        driverClassName: com.mysql.jdbc.Driver
         druid:
             first:
-                url: jdbc:sqlite:D:/ideaWorkspaces/X-SpringBoot/doc/mysqlite3.db?date_string_format=yyyy-MM-dd HH:mm:ss
-                username:
-                password:
+                url: jdbc:mysql://localhost:3306/x_springboot?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+                username: root
+                password: root
             second:
                 url: jdbc:mysql://localhost:3306/x_springboot?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
                 username: root
@@ -16,9 +16,10 @@ spring:
             min-idle: 10
             max-wait: 60000
             pool-prepared-statements: true
-            max-pool-prepared-statement-per-connection-size: 0
+            max-pool-prepared-statement-per-connection-size: 20
             time-between-eviction-runs-millis: 60000
             min-evictable-idle-time-millis: 300000
+            validation-query: SELECT 1 FROM DUAL
             test-while-idle: true
             test-on-borrow: false
             test-on-return: false
