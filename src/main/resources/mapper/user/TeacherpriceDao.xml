@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.suke.czx.modules.user.dao.TeacherpriceDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.suke.czx.modules.user.entity.TeacherpriceEntity" id="teacherpriceMap">
+        <result property="teacherid" column="teacherId"/>
+        <result property="teachername" column="teacherName"/>
+        <result property="unitprice" column="unitprice"/>
+        <result property="sumprice" column="sumprice"/>
+        <result property="iscompany" column="iscompany"/>
+        <result property="companyname" column="companyname"/>
+        <result property="sfz" column="sfz"/>
+        <result property="bankname" column="bankname"/>
+        <result property="bankno" column="bankno"/>
+        <result property="memo" column="memo"/>
+        <result property="createtime" column="createTime"/>
+        <result property="updatetime" column="updateTime"/>
+        <result property="iseff" column="iseff"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.suke.czx.modules.user.entity.TeacherpriceEntity">
+		select * from t_teacherprice where teacherId = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.suke.czx.modules.user.entity.TeacherpriceEntity">
+		select * from t_teacherprice
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by teacherId desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from t_teacherprice 
+	</select>
+	 
+	<insert id="save" parameterType="com.suke.czx.modules.user.entity.TeacherpriceEntity" useGeneratedKeys="true" keyProperty="teacherid">
+		insert into t_teacherprice
+		(
+			`teacherName`, 
+			`unitprice`, 
+			`sumprice`, 
+			`iscompany`, 
+			`companyname`, 
+			`sfz`, 
+			`bankname`, 
+			`bankno`, 
+			`memo`, 
+			`createTime`, 
+			`updateTime`, 
+			`iseff`
+		)
+		values
+		(
+			#{teachername}, 
+			#{unitprice}, 
+			#{sumprice}, 
+			#{iscompany}, 
+			#{companyname}, 
+			#{sfz}, 
+			#{bankname}, 
+			#{bankno}, 
+			#{memo}, 
+			#{createtime}, 
+			#{updatetime}, 
+			#{iseff}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.suke.czx.modules.user.entity.TeacherpriceEntity">
+		update t_teacherprice 
+		<set>
+			<if test="teachername != null">`teacherName` = #{teachername}, </if>
+			<if test="unitprice != null">`unitprice` = #{unitprice}, </if>
+			<if test="sumprice != null">`sumprice` = #{sumprice}, </if>
+			<if test="iscompany != null">`iscompany` = #{iscompany}, </if>
+			<if test="companyname != null">`companyname` = #{companyname}, </if>
+			<if test="sfz != null">`sfz` = #{sfz}, </if>
+			<if test="bankname != null">`bankname` = #{bankname}, </if>
+			<if test="bankno != null">`bankno` = #{bankno}, </if>
+			<if test="memo != null">`memo` = #{memo}, </if>
+			<if test="createtime != null">`createTime` = #{createtime}, </if>
+			<if test="updatetime != null">`updateTime` = #{updatetime}, </if>
+			<if test="iseff != null">`iseff` = #{iseff}</if>
+		</set>
+		where teacherId = #{teacherid}
+	</update>
+	
+	<delete id="delete">
+		delete from t_teacherprice where teacherId = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from t_teacherprice where teacherId in 
+		<foreach item="teacherid" collection="array" open="(" separator="," close=")">
+			#{teacherid}
+		</foreach>
+	</delete>
+
+</mapper>
