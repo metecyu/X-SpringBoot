@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.suke.czx.modules.user.dao.MonthteacherclassDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.suke.czx.modules.user.entity.MonthteacherclassEntity" id="monthteacherclassMap">
+        <result property="mtmcid" column="mtmcId"/>
+        <result property="monthteacherid" column="monthteacherid"/>
+        <result property="classid" column="classid"/>
+        <result property="classhour" column="classhour"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.suke.czx.modules.user.entity.MonthteacherclassEntity">
+		select * from t_monthteacherclass where mtmcId = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.suke.czx.modules.user.entity.MonthteacherclassEntity">
+		select * from t_monthteacherclass
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by mtmcId desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from t_monthteacherclass 
+	</select>
+	 
+	<insert id="save" parameterType="com.suke.czx.modules.user.entity.MonthteacherclassEntity" useGeneratedKeys="true" keyProperty="mtmcid">
+		insert into t_monthteacherclass
+		(
+			`monthteacherid`, 
+			`classid`, 
+			`classhour`
+		)
+		values
+		(
+			#{monthteacherid}, 
+			#{classid}, 
+			#{classhour}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.suke.czx.modules.user.entity.MonthteacherclassEntity">
+		update t_monthteacherclass 
+		<set>
+			<if test="monthteacherid != null">`monthteacherid` = #{monthteacherid}, </if>
+			<if test="classid != null">`classid` = #{classid}, </if>
+			<if test="classhour != null">`classhour` = #{classhour}</if>
+		</set>
+		where mtmcId = #{mtmcid}
+	</update>
+	
+	<delete id="delete">
+		delete from t_monthteacherclass where mtmcId = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from t_monthteacherclass where mtmcId in 
+		<foreach item="mtmcid" collection="array" open="(" separator="," close=")">
+			#{mtmcid}
+		</foreach>
+	</delete>
+
+</mapper>

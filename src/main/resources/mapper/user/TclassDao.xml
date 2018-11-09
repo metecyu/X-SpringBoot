@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.suke.czx.modules.user.dao.TclassDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.suke.czx.modules.user.entity.TclassEntity" id="tclassMap">
+        <result property="classid" column="classid"/>
+        <result property="classname" column="classname"/>
+        <result property="classtype" column="classtype"/>
+        <result property="createtime" column="createTime"/>
+        <result property="updatetime" column="updateTime"/>
+        <result property="iseff" column="iseff"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.suke.czx.modules.user.entity.TclassEntity">
+		select * from t_tclass where classid = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.suke.czx.modules.user.entity.TclassEntity">
+		select * from t_tclass
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by classid desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from t_tclass 
+	</select>
+	 
+	<insert id="save" parameterType="com.suke.czx.modules.user.entity.TclassEntity" useGeneratedKeys="true" keyProperty="classid">
+		insert into t_tclass
+		(
+			`classname`, 
+			`classtype`, 
+			`createTime`, 
+			`updateTime`, 
+			`iseff`
+		)
+		values
+		(
+			#{classname}, 
+			#{classtype}, 
+			#{createtime}, 
+			#{updatetime}, 
+			#{iseff}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.suke.czx.modules.user.entity.TclassEntity">
+		update t_tclass 
+		<set>
+			<if test="classname != null">`classname` = #{classname}, </if>
+			<if test="classtype != null">`classtype` = #{classtype}, </if>
+			<if test="createtime != null">`createTime` = #{createtime}, </if>
+			<if test="updatetime != null">`updateTime` = #{updatetime}, </if>
+			<if test="iseff != null">`iseff` = #{iseff}</if>
+		</set>
+		where classid = #{classid}
+	</update>
+	
+	<delete id="delete">
+		delete from t_tclass where classid = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from t_tclass where classid in 
+		<foreach item="classid" collection="array" open="(" separator="," close=")">
+			#{classid}
+		</foreach>
+	</delete>
+
+</mapper>

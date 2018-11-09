@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.suke.czx.modules.user.dao.MonthteacherDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.suke.czx.modules.user.entity.MonthteacherEntity" id="monthteacherMap">
+        <result property="monthteacherid" column="monthteacherid"/>
+        <result property="termid" column="termid"/>
+        <result property="teacherid" column="teacherId"/>
+        <result property="unitprice" column="unitprice"/>
+        <result property="sumhour" column="sumhour"/>
+        <result property="sumprice" column="sumprice"/>
+        <result property="createtime" column="createTime"/>
+        <result property="updatetime" column="updateTime"/>
+        <result property="iseff" column="iseff"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.suke.czx.modules.user.entity.MonthteacherEntity">
+		select * from t_monthteacher where monthteacherid = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.suke.czx.modules.user.entity.MonthteacherEntity">
+		select * from t_monthteacher
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by monthteacherid desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from t_monthteacher 
+	</select>
+	 
+	<insert id="save" parameterType="com.suke.czx.modules.user.entity.MonthteacherEntity" useGeneratedKeys="true" keyProperty="monthteacherid">
+		insert into t_monthteacher
+		(
+			`termid`, 
+			`teacherId`, 
+			`unitprice`, 
+			`sumhour`, 
+			`sumprice`, 
+			`createTime`, 
+			`updateTime`, 
+			`iseff`
+		)
+		values
+		(
+			#{termid}, 
+			#{teacherid}, 
+			#{unitprice}, 
+			#{sumhour}, 
+			#{sumprice}, 
+			#{createtime}, 
+			#{updatetime}, 
+			#{iseff}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.suke.czx.modules.user.entity.MonthteacherEntity">
+		update t_monthteacher 
+		<set>
+			<if test="termid != null">`termid` = #{termid}, </if>
+			<if test="teacherid != null">`teacherId` = #{teacherid}, </if>
+			<if test="unitprice != null">`unitprice` = #{unitprice}, </if>
+			<if test="sumhour != null">`sumhour` = #{sumhour}, </if>
+			<if test="sumprice != null">`sumprice` = #{sumprice}, </if>
+			<if test="createtime != null">`createTime` = #{createtime}, </if>
+			<if test="updatetime != null">`updateTime` = #{updatetime}, </if>
+			<if test="iseff != null">`iseff` = #{iseff}</if>
+		</set>
+		where monthteacherid = #{monthteacherid}
+	</update>
+	
+	<delete id="delete">
+		delete from t_monthteacher where monthteacherid = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from t_monthteacher where monthteacherid in 
+		<foreach item="monthteacherid" collection="array" open="(" separator="," close=")">
+			#{monthteacherid}
+		</foreach>
+	</delete>
+
+</mapper>
