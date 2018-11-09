@@ -40,6 +40,26 @@ public class TeacherpriceEntity implements Serializable {
 	private Date updatetime;
 	//
 	private Integer iseff;
+	// 非数据库字段
+
+	private String iscompanyCN;
+
+	public String getIscompanyCN() {
+		String str="异常";
+		if(iscompany ==null){
+			return str;
+		}
+		if(iscompany.intValue()==0) {
+			return "个人";
+		}else if(iscompany.intValue()==1){
+			return "公司";
+		}
+		return str;
+	}
+
+	public void setIscompanyCN(String iscompanyCN) {
+		this.iscompanyCN = iscompanyCN;
+	}
 
 	/**
 	 * 设置：

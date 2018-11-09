@@ -25,6 +25,7 @@ public class UserEntity implements Serializable {
 	//创建时间
 	private Date createTime;
 
+
 	/**
 	 * 设置：用户id
 	 */

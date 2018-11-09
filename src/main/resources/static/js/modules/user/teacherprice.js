@@ -3,19 +3,11 @@ $(function () {
         url: baseURL + 'user/teacherprice/list',
         datatype: "json",
         colModel: [			
-			{ label: 'teacherid', name: 'teacherid', index: 'teacherId', width: 50, key: true },
-			{ label: '', name: 'teachername', index: 'teacherName', width: 80 }, 			
-			{ label: '', name: 'unitprice', index: 'unitprice', width: 80 }, 			
-			{ label: '', name: 'sumprice', index: 'sumprice', width: 80 }, 			
-			{ label: '', name: 'iscompany', index: 'iscompany', width: 80 }, 			
-			{ label: '', name: 'companyname', index: 'companyname', width: 80 }, 			
-			{ label: '', name: 'sfz', index: 'sfz', width: 80 }, 			
-			{ label: '', name: 'bankname', index: 'bankname', width: 80 }, 			
-			{ label: '', name: 'bankno', index: 'bankno', width: 80 }, 			
-			{ label: '', name: 'memo', index: 'memo', width: 80 }, 			
-			{ label: '', name: 'createtime', index: 'createTime', width: 80 }, 			
-			{ label: '', name: 'updatetime', index: 'updateTime', width: 80 }, 			
-			{ label: '', name: 'iseff', index: 'iseff', width: 80 }			
+			{ label: '编号', name: 'teacherid', index: 'teacherId', width: 50, key: true },
+			{ label: '姓名', name: 'teachername', index: 'teacherName', width: 80 },
+			{ label: '单价', name: 'unitprice', index: 'unitprice', width: 80 },
+			{ label: '类型', name: 'iscompanyCN', index: 'iscompany', width: 80 },
+			{ label: '公司名称', name: 'companyname', index: 'companyname', width: 80 }
         ],
 		viewrecords: true,
         height: 385,
@@ -58,7 +50,7 @@ var vm = new Vue({
 		add: function(){
 			vm.showList = false;
 			vm.title = "新增";
-			vm.teacherprice = {};
+			vm.teacherprice = {iscompany:0};
 		},
 		update: function (event) {
 			var teacherid = getSelectedRow();
