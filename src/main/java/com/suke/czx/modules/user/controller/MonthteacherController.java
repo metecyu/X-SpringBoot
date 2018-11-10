@@ -31,7 +31,7 @@ public class MonthteacherController {
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("user:monthteacher:list")
+    //@RequiresPermissions("user:monthteacher:list")
     public R list(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
@@ -45,48 +45,6 @@ public class MonthteacherController {
     }
 
 
-    /**
-     * 信息
-     */
-    @RequestMapping("/info/{monthteacherid}")
-    @RequiresPermissions("user:monthteacher:info")
-    public R info(@PathVariable("monthteacherid") Long monthteacherid){
-			MonthteacherEntity monthteacher = monthteacherService.queryObject(monthteacherid);
 
-        return R.ok().put("monthteacher", monthteacher);
-    }
-
-    /**
-     * 保存
-     */
-    @RequestMapping("/save")
-    @RequiresPermissions("user:monthteacher:save")
-    public R save(@RequestBody MonthteacherEntity monthteacher){
-			monthteacherService.save(monthteacher);
-
-        return R.ok();
-    }
-
-    /**
-     * 修改
-     */
-    @RequestMapping("/update")
-    @RequiresPermissions("user:monthteacher:update")
-    public R update(@RequestBody MonthteacherEntity monthteacher){
-			monthteacherService.update(monthteacher);
-
-        return R.ok();
-    }
-
-    /**
-     * 删除
-     */
-    @RequestMapping("/delete")
-    @RequiresPermissions("user:monthteacher:delete")
-    public R delete(@RequestBody Long[] monthteacherids){
-			monthteacherService.deleteBatch(monthteacherids);
-
-        return R.ok();
-    }
 	
 }

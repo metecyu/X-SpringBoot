@@ -60,6 +60,7 @@ public class ApiLoginController {
         //生成token
         String token = jwtUtils.generateToken(user.get("user_id"));
         user.put("token", token);
+        System.out.println("token===="+ token);
         user.put("expire", jwtUtils.getExpire());
         return AppBaseResult.success().setEncryptData(user);
     }

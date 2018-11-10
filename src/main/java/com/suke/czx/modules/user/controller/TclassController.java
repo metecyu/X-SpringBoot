@@ -31,8 +31,9 @@ public class TclassController {
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("user:tclass:list")
+    //@RequiresPermissions("user:tclass:list")
     public R list(@RequestParam Map<String, Object> params){
+        System.out.println(333333445);
         //查询列表数据
         Query query = new Query(params);
 
@@ -49,7 +50,7 @@ public class TclassController {
      * 信息
      */
     @RequestMapping("/info/{classid}")
-    @RequiresPermissions("user:tclass:info")
+    //@RequiresPermissions("user:tclass:info")
     public R info(@PathVariable("classid") Long classid){
 			TclassEntity tclass = tclassService.queryObject(classid);
 

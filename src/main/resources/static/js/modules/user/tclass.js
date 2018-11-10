@@ -103,7 +103,9 @@ var vm = new Vue({
 			});
 		},
 		getInfo: function(classid){
+            console.info(baseURL + "user/tclass/info/"+classid)
 			$.get(baseURL + "user/tclass/info/"+classid, function(r){
+				console.info("info:"+r)
                 vm.tclass = r.tclass;
             });
 		},

@@ -222,6 +222,14 @@
 				<configuration>
 					<fork>true</fork>
 				</configuration>
+				<dependencies>
+					<!-- spring热部署 -->
+					<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>springloaded</artifactId>
+						<version>1.2.6.RELEASE</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 			<!-- 跳过单元测试 -->
 			<plugin>
