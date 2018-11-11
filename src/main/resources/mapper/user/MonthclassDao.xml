@@ -11,6 +11,7 @@
         <result property="createtime" column="createTime"/>
         <result property="updatetime" column="updateTime"/>
         <result property="iseff" column="iseff"/>
+		<result property="classname" column="classname"/>
     </resultMap>
 
 	<select id="queryObject" resultType="com.suke.czx.modules.user.entity.MonthclassEntity">
@@ -77,5 +78,21 @@
 			#{monthclassid}
 		</foreach>
 	</delete>
+
+
+	<select id="queryListByTermid" resultType="com.suke.czx.modules.user.entity.MonthclassEntity">
+		SELECT mc.*,tc.classname from t_monthclass mc,t_tclass tc
+		<where>
+			tc.classid=mc.classid
+			<choose>
+				<when test="value != null">
+					and termid= #{termid}
+				</when>
+				<otherwise><!--故意查不到任何数据-->
+					and termid= -999
+				</otherwise>
+			</choose>
+		</where>
+	</select>
 
 </mapper>

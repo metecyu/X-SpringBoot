@@ -4,6 +4,8 @@ import com.suke.czx.modules.user.entity.MonthclassEntity;
 import com.suke.czx.modules.sys.dao.BaseDao;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * 月度班级表
  * 
@@ -13,5 +15,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface MonthclassDao extends BaseDao<MonthclassEntity> {
+    List<MonthclassEntity> queryListByTermid(Long termid);
 	
 }

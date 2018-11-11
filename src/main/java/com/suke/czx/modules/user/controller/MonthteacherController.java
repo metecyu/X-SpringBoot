@@ -2,6 +2,13 @@ package com.suke.czx.modules.user.controller;
 
 import java.util.List;
 import java.util.Map;
+
+import com.suke.czx.modules.user.entity.MonthclassEntity;
+import com.suke.czx.modules.user.entity.TclassEntity;
+import com.suke.czx.modules.user.entity.TermEntity;
+import com.suke.czx.modules.user.service.MonthclassService;
+import com.suke.czx.modules.user.service.TermService;
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +33,8 @@ import com.suke.czx.common.utils.R;
 public class MonthteacherController {
     @Autowired
     private MonthteacherService monthteacherService;
+    @Autowired
+    private MonthclassService monthclassService;
 
     /**
      * 列表
@@ -36,14 +45,26 @@ public class MonthteacherController {
         //查询列表数据
         Query query = new Query(params);
 
-        List<MonthteacherEntity> monthteacherList = monthteacherService.queryList(query);
+        List<MonthteacherEntity> monthteacherList = monthteacherService.queryListView(query);
         int total = monthteacherService.queryTotal(query);
 
         PageUtils pageUtil = new PageUtils(monthteacherList, total, query.getLimit(), query.getPage());
 
+
+
         return R.ok().put("page", pageUtil);
     }
 
+
+    /**
+     * 本月选择的班级
+     */
+    @RequestMapping("/termClassList/{termid}")
+    public R termClassList(@PathVariable("termid") Long termid){
+        // 期数下拉框
+        List<MonthclassEntity> termClassList = monthclassService.queryListByTermid(termid);
+        return R.ok().put("termClassList",termClassList);
+    }
 
 
 	

@@ -27,6 +27,18 @@ public class MonthclassEntity implements Serializable {
 	//
 	private Integer iseff;
 
+	// 非本表字段
+	private String classname;
+
+	public String getClassname() {
+		return classname;
+	}
+
+	public void setClassname(String classname) {
+		this.classname = classname;
+	}
+	// end 非本表字段
+
 	/**
 	 * 设置：
 	 */

@@ -51,5 +51,9 @@ public class MonthclassServiceImpl implements MonthclassService {
 	public void deleteBatch(Long[] monthclassids){
 		monthclassDao.deleteBatch(monthclassids);
 	}
+	@Override
+	public List<MonthclassEntity> queryListByTermid(Long termid){
+		return monthclassDao.queryListByTermid(termid);
+	}
 	
 }

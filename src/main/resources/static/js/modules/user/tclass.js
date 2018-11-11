@@ -4,6 +4,7 @@ $(function () {
         datatype: "json",
         colModel: [			
 			{ label: '编号', name: 'classid', index: 'classid', width: 50, key: true },
+            { label: '年度', name: 'year', index: 'year', width: 80 },
 			{ label: '班级名称', name: 'classname', index: 'classname', width: 80 }, 			
 			{ label: '班级类型', name: 'classtypeCN', index: 'classtype', width: 80 }
         ],

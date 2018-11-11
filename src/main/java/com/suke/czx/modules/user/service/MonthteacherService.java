@@ -27,4 +27,6 @@ public interface MonthteacherService {
 	void delete(Long monthteacherid);
 	
 	void deleteBatch(Long[] monthteacherids);
+
+	List<MonthteacherEntity> queryListView(Map<String, Object> map);
 }

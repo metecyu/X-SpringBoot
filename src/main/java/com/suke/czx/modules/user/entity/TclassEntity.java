@@ -26,6 +26,10 @@ public class TclassEntity implements Serializable {
 	private Date updatetime;
 	//
 	private Integer iseff;
+	//
+	private Integer year;
+
+
 
 	// 非数据库字段
 	private String classtypeCN;
@@ -124,5 +128,13 @@ public class TclassEntity implements Serializable {
 	 */
 	public Integer getIseff() {
 		return iseff;
+	}
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
 	}
 }

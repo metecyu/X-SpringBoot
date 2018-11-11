@@ -11,6 +11,7 @@
         <result property="createtime" column="createTime"/>
         <result property="updatetime" column="updateTime"/>
         <result property="iseff" column="iseff"/>
+		<result property="year" column="year"/>
     </resultMap>
 
 	<select id="queryObject" resultType="com.suke.czx.modules.user.entity.TclassEntity">
@@ -40,7 +41,8 @@
 		insert into t_tclass
 		(
 			`classname`, 
-			`classtype`, 
+			`classtype`,
+			`year`,
 			`createTime`, 
 			`updateTime`, 
 			`iseff`
@@ -48,7 +50,8 @@
 		values
 		(
 			#{classname}, 
-			#{classtype}, 
+			#{classtype},
+			#{year},
 			#{createtime}, 
 			#{updatetime}, 
 			#{iseff}
@@ -60,6 +63,7 @@
 		<set>
 			<if test="classname != null">`classname` = #{classname}, </if>
 			<if test="classtype != null">`classtype` = #{classtype}, </if>
+			<if test="year != null">`year` = #{year}, </if>
 			<if test="createtime != null">`createTime` = #{createtime}, </if>
 			<if test="updatetime != null">`updateTime` = #{updatetime}, </if>
 			<if test="iseff != null">`iseff` = #{iseff}</if>

@@ -30,6 +30,15 @@ public class TermEntity implements Serializable {
 	private Integer iseff;
 	// 非数据库字段
 	private String termtypeCN;
+	private String termSignCN;
+
+	public String getTermSignCN() {
+		return this.getYear()+"-"+this.getMonth()+"-"+getTermtypeCN();
+	}
+
+	public void setTermSignCN(String termSignCN) {
+		this.termSignCN = termSignCN;
+	}
 
 	public String getTermtypeCN() {
 		if(termtype.intValue()==1) {
@@ -39,6 +48,8 @@ public class TermEntity implements Serializable {
 		}
 		return "异常";
 	}
+
+	// end 非数据库字段
 
 	public void setTermtypeCN(String termtypeCN) {
 		this.termtypeCN = termtypeCN;

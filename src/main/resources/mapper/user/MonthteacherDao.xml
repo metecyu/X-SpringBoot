@@ -14,6 +14,8 @@
         <result property="createtime" column="createTime"/>
         <result property="updatetime" column="updateTime"/>
         <result property="iseff" column="iseff"/>
+		<result property="sumfactprice" column="sumfactprice"/>
+		<result property="teachername" column="teachername"/>
     </resultMap>
 
 	<select id="queryObject" resultType="com.suke.czx.modules.user.entity.MonthteacherEntity">
@@ -34,6 +36,30 @@
 			limit #{offset}, #{limit}
 		</if>
 	</select>
+
+	<select id="queryListView" resultType="com.suke.czx.modules.user.entity.MonthteacherEntity">
+		select mt.*,tp.teacherName from t_monthteacher mt,t_teacherPrice tp
+
+		<where>
+			mt.teacherId=tp.teacherId
+			<if test="key != null and key.trim() != ''">
+				and mt.termid = #{key}
+			</if>
+		</where>
+		<choose>
+			<when test="sidx != null and sidx.trim() != ''">
+				order by ${sidx} ${order}
+			</when>
+			<otherwise>
+				order by monthteacherid desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+
 	
  	<select id="queryTotal" resultType="int">
 		select count(*) from t_monthteacher 
@@ -46,7 +72,8 @@
 			`teacherId`, 
 			`unitprice`, 
 			`sumhour`, 
-			`sumprice`, 
+			`sumprice`,
+			`sumfactprice`,
 			`createTime`, 
 			`updateTime`, 
 			`iseff`
@@ -57,7 +84,8 @@
 			#{teacherid}, 
 			#{unitprice}, 
 			#{sumhour}, 
-			#{sumprice}, 
+			#{sumprice},
+			#{sumfactprice},
 			#{createtime}, 
 			#{updatetime}, 
 			#{iseff}
@@ -72,6 +100,7 @@
 			<if test="unitprice != null">`unitprice` = #{unitprice}, </if>
 			<if test="sumhour != null">`sumhour` = #{sumhour}, </if>
 			<if test="sumprice != null">`sumprice` = #{sumprice}, </if>
+			<if test="sumfactprice != null">`sumfactprice` = #{sumfactprice}, </if>
 			<if test="createtime != null">`createTime` = #{createtime}, </if>
 			<if test="updatetime != null">`updateTime` = #{updatetime}, </if>
 			<if test="iseff != null">`iseff` = #{iseff}</if>

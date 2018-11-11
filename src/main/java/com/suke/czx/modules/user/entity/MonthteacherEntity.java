@@ -33,6 +33,19 @@ public class MonthteacherEntity implements Serializable {
 	private Date updatetime;
 	//
 	private Integer iseff;
+	//
+	private BigDecimal sumfactprice;
+
+	// 非数据库
+	private String teachername;
+
+	public String getTeachername() {
+		return teachername;
+	}
+
+	public void setTeachername(String teachername) {
+		this.teachername = teachername;
+	}
 
 	/**
 	 * 设置：
@@ -142,4 +155,13 @@ public class MonthteacherEntity implements Serializable {
 	public Integer getIseff() {
 		return iseff;
 	}
+
+	public BigDecimal getSumfactprice() {
+		return sumfactprice;
+	}
+
+	public void setSumfactprice(BigDecimal sumfactprice) {
+		this.sumfactprice = sumfactprice;
+	}
+
 }

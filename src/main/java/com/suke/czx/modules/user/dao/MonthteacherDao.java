@@ -4,6 +4,9 @@ import com.suke.czx.modules.user.entity.MonthteacherEntity;
 import com.suke.czx.modules.sys.dao.BaseDao;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 班级表
  * 
@@ -13,5 +16,8 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface MonthteacherDao extends BaseDao<MonthteacherEntity> {
+
+    List<MonthteacherEntity> queryListView(Map<String, Object> map);
+
 	
 }

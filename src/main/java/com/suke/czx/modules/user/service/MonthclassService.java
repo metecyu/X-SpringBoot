@@ -17,6 +17,7 @@ public interface MonthclassService {
 	MonthclassEntity queryObject(Long monthclassid);
 	
 	List<MonthclassEntity> queryList(Map<String, Object> map);
+
 	
 	int queryTotal(Map<String, Object> map);
 	
@@ -27,4 +28,7 @@ public interface MonthclassService {
 	void delete(Long monthclassid);
 	
 	void deleteBatch(Long[] monthclassids);
+
+	List<MonthclassEntity> queryListByTermid(Long termid);
+
 }

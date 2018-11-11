@@ -26,6 +26,10 @@ public class MonthteacherServiceImpl implements MonthteacherService {
 	public List<MonthteacherEntity> queryList(Map<String, Object> map){
 		return monthteacherDao.queryList(map);
 	}
+	@Override
+	public List<MonthteacherEntity> queryListView(Map<String, Object> map){
+		return monthteacherDao.queryListView(map);
+	}
 	
 	@Override
 	public int queryTotal(Map<String, Object> map){

@@ -3,6 +3,8 @@ package com.suke.czx.modules.user.controller;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -92,6 +94,17 @@ public class TermController {
 			termService.deleteBatch(termids);
 
         return R.ok();
+    }
+
+
+    /**
+     * 期数下拉框
+     */
+    @RequestMapping("/termCommList/{termtype}")
+    public R termCommList(@PathVariable("termtype") Long termtype){
+        // 期数下拉框
+        List<TermEntity>  termCommList = termService.queryList(new HashedMap());
+        return R.ok().put("termCommList",termCommList);
     }
 	
 }
