@@ -36,6 +36,19 @@
  	<select id="queryTotal" resultType="int">
 		select count(*) from t_tclass 
 	</select>
+
+
+	<select id="getExistYearList" resultType="int">
+		select year from t_tclass GROUP BY year order by year DESC
+	</select>
+
+	<select id="queryListByYearClassType" resultType="com.suke.czx.modules.user.entity.TclassEntity" parameterType="com.suke.czx.modules.user.entity.TclassEntity">
+		select * from t_tclass
+		<where>
+			year = #{year} and classtype=#{classtype}
+		</where>
+	</select>
+
 	 
 	<insert id="save" parameterType="com.suke.czx.modules.user.entity.TclassEntity" useGeneratedKeys="true" keyProperty="classid">
 		insert into t_tclass

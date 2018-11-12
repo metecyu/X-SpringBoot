@@ -1,7 +1,10 @@
 package com.suke.czx.modules.user.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.suke.czx.modules.sys.entity.SysMenuEntity;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -55,6 +58,15 @@ public class TclassController {
 			TclassEntity tclass = tclassService.queryObject(classid);
 
         return R.ok().put("tclass", tclass);
+    }
+
+    /**
+     * 所有菜单列表
+     */
+    @RequestMapping("/classMenuList")
+    public List<SysMenuEntity> ClassMenuList(){
+        List<SysMenuEntity> menuList = tclassService.getClassMenuList(2018, 10);
+        return menuList;
     }
 
     /**

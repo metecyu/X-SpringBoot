@@ -43,16 +43,32 @@ $(function () {
 
 });
 
+var setting = {
+    data: {
+        simpleData: {
+            enable: true,
+            idKey: "menuId",
+            pIdKey: "parentId",
+            rootPId: -1
+        },
+        key: {
+            url:"nourl"
+        }
+    },
+    check:{
+        enable:true,
+        nocheckInherit:true
+    }
+};
+var ztree;
+
 var vm = new Vue({
 	el:'#rrapp',
 	data:{
 		q:{
 			key: null
 		},
-        items:[
-            { termid: 'Foo' },
-            { termid: 'Bar' }
-        ],
+        displayArea:1,
         termCommList:[],
         termClassList:[]
 
@@ -66,7 +82,6 @@ var vm = new Vue({
             $.get(baseURL + "user/term/termCommList/1", function(r){
                 //alert(termCommList)
                 vm.termCommList = r.termCommList;
-                console.info(vm.items[0])
                 console.info(vm.termCommList);
             });
         },
@@ -77,7 +92,26 @@ var vm = new Vue({
                 console.info(vm.termClassList)
             });
         },
+        chooseClass: function(){
+            vm.displayArea = 2;
+            vm.title = "新增";
+            vm.role = {};
+            vm.getMenuTree(null);
+        },
+        getMenuTree: function(roleId) {
+            //加载菜单树  sys/menu/list
+            $.get(baseURL + "user/tclass/classMenuList", function(r){
+                ztree = $.fn.zTree.init($("#menuTree"), setting, r);
+                //展开所有节点
+                ztree.expandAll(true);
+
+                if(roleId != null){
+                    vm.getRole(roleId);
+                }
+            });
+        },
 		reload: function (event) {
+		    vm.displayArea=1;
 			var page = $("#jqGrid").jqGrid('getGridParam','page');
 			$("#jqGrid").jqGrid('setGridParam',{ 
 				postData:{'key': vm.q.key},

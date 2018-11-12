@@ -4,6 +4,8 @@ import com.suke.czx.modules.user.entity.TclassEntity;
 import com.suke.czx.modules.sys.dao.BaseDao;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * 班级表
  * 
@@ -13,5 +15,10 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface TclassDao extends BaseDao<TclassEntity> {
+
+    List<Integer> getExistYearList();
+
+
+    List<TclassEntity> queryListByYearClassType(TclassEntity tclassEntity);
 	
 }

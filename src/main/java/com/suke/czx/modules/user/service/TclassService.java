@@ -1,5 +1,6 @@
 package com.suke.czx.modules.user.service;
 
+import com.suke.czx.modules.sys.entity.SysMenuEntity;
 import com.suke.czx.modules.user.entity.TclassEntity;
 
 import java.util.List;
@@ -27,4 +28,8 @@ public interface TclassService {
 	void delete(Long classid);
 	
 	void deleteBatch(Long[] classids);
+
+	List<Integer> getExistYearList();
+	List<TclassEntity> queryListByYearClassType(int year,int classtype);
+	public List<SysMenuEntity> getClassMenuList(int year, int classtypeGroup);
 }
