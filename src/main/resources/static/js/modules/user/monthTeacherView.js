@@ -84,7 +84,7 @@ var vm = new Vue({
 			key: null
 		},
         thisTermId:null,
-        term:null,
+        term:{termSignCN:null},
         displayArea:1,
         thisMonthteacherclass:{classhour:12,classid:null}, //添加工时时使用
         termCommList:[], //期数下拉框
