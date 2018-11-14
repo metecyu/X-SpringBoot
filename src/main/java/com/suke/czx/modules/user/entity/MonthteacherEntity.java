@@ -3,6 +3,7 @@ package com.suke.czx.modules.user.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.math.BigDecimal;
+import java.util.List;
 
 
 /**
@@ -36,8 +37,17 @@ public class MonthteacherEntity implements Serializable {
 	//
 	private BigDecimal sumfactprice;
 
-	// 非数据库
+	// 非本数据表
 	private String teachername;
+	private List<MonthteacherclassEntity> monthteacherclassEntityList;
+
+	public List<MonthteacherclassEntity> getMonthteacherclassEntityList() {
+		return monthteacherclassEntityList;
+	}
+
+	public void setMonthteacherclassEntityList(List<MonthteacherclassEntity> monthteacherclassEntityList) {
+		this.monthteacherclassEntityList = monthteacherclassEntityList;
+	}
 
 	public String getTeachername() {
 		return teachername;

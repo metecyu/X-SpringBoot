@@ -2,6 +2,7 @@ package com.suke.czx.modules.user.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -28,9 +29,18 @@ public class TermEntity implements Serializable {
 	private Date updatetime;
 	//
 	private Integer iseff;
-	// 非数据库字段
+	// 非数据表字段
 	private String termtypeCN;
 	private String termSignCN;
+	private List<String> thisTermClassIdList;
+
+	public List<String> getThisTermClassIdList() {
+		return thisTermClassIdList;
+	}
+
+	public void setThisTermClassIdList(List<String> thisTermClassIdList) {
+		this.thisTermClassIdList = thisTermClassIdList;
+	}
 
 	public String getTermSignCN() {
 		return this.getYear()+"-"+this.getMonth()+"-"+getTermtypeCN();

@@ -55,8 +55,7 @@ public class TclassController {
     @RequestMapping("/info/{classid}")
     //@RequiresPermissions("user:tclass:info")
     public R info(@PathVariable("classid") Long classid){
-			TclassEntity tclass = tclassService.queryObject(classid);
-
+        TclassEntity tclass = tclassService.queryObject(classid);
         return R.ok().put("tclass", tclass);
     }
 
@@ -67,6 +66,17 @@ public class TclassController {
     public List<SysMenuEntity> ClassMenuList(){
         List<SysMenuEntity> menuList = tclassService.getClassMenuList(2018, 10);
         return menuList;
+    }
+
+    /**
+     * 当期哪些班级id
+     * term
+     */
+    @RequestMapping("/termInfo/{termid}")
+    //@RequiresPermissions("user:tclass:info")
+    public R termInfo(@PathVariable("termid") Long classid){
+        TclassEntity tclass = tclassService.queryObject(classid);
+        return R.ok().put("tclass", tclass);
     }
 
     /**

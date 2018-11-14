@@ -79,12 +79,16 @@ public class TclassServiceImpl implements TclassService {
 		List<Integer> years = tclassDao.getExistYearList();
 		for (Integer yearOne: years) {
 			SysMenuEntity parent = new SysMenuEntity();
-			parent.setMenuId(yearOne.longValue());
+			parent.setMenuId(-yearOne.longValue());
 			parent.setName(yearOne+"");
 			parent.setParentId(-1l);
 			outList.add(parent);
 			if (classtypeGroup==10){
-				List<TclassEntity> tclassEntityList = queryListByYearClassType(yearOne, 11);
+				List<TclassEntity> tclassEntityList = new ArrayList();
+				List<TclassEntity> tclassEntityList_11 = queryListByYearClassType(yearOne, 11);
+				List<TclassEntity> tclassEntityList_12 = queryListByYearClassType(yearOne, 12);
+				tclassEntityList.addAll(tclassEntityList_11);
+				tclassEntityList.addAll(tclassEntityList_12);
 				for (TclassEntity entity:tclassEntityList ) {
 					SysMenuEntity menu = new SysMenuEntity();
 					menu.setMenuId(entity.getClassid());

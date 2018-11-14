@@ -51,5 +51,10 @@ public class MonthteacherclassServiceImpl implements MonthteacherclassService {
 	public void deleteBatch(Long[] mtmcids){
 		monthteacherclassDao.deleteBatch(mtmcids);
 	}
+	@Override
+	public List<MonthteacherclassEntity> queryListByMonthteacherid(Long monthteacherid){
+		return monthteacherclassDao.queryListByMonthteacherid(monthteacherid);
+	}
+
 	
 }

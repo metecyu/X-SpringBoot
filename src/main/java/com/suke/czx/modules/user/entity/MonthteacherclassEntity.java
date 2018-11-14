@@ -1,6 +1,7 @@
 package com.suke.czx.modules.user.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 
@@ -22,6 +23,37 @@ public class MonthteacherclassEntity implements Serializable {
 	private Integer classid;
 	//
 	private Integer classhour;
+
+	private BigDecimal price;
+
+	private BigDecimal factprice;
+
+	// 非本表数据
+	private String classname;
+
+	public String getClassname() {
+		return classname;
+	}
+
+	public void setClassname(String classname) {
+		this.classname = classname;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public BigDecimal getFactprice() {
+		return factprice;
+	}
+
+	public void setFactprice(BigDecimal factprice) {
+		this.factprice = factprice;
+	}
 
 	/**
 	 * 设置：

@@ -9,6 +9,9 @@
         <result property="monthteacherid" column="monthteacherid"/>
         <result property="classid" column="classid"/>
         <result property="classhour" column="classhour"/>
+		<result property="price" column="price"/>
+		<result property="factprice" column="factprice"/>
+		<result property="classname" column="classname"/>
     </resultMap>
 
 	<select id="queryObject" resultType="com.suke.czx.modules.user.entity.MonthteacherclassEntity">
@@ -69,5 +72,23 @@
 			#{mtmcid}
 		</foreach>
 	</delete>
+
+
+	<select id="queryListByMonthteacherid" resultType="com.suke.czx.modules.user.entity.MonthteacherclassEntity">
+		SELECT mtc.*,tc.classname from t_monthteacherclass mtc,t_tclass tc
+		<where>
+			tc.classid = mtc.classid
+			<choose>
+				<when test="value != null">
+					and monthteacherid= #{monthteacherid}
+				</when>
+				<otherwise><!--故意查不到任何数据-->
+					and termid= -999
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+
+
 
 </mapper>
