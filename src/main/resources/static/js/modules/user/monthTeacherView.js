@@ -54,8 +54,10 @@ $(function () {
         }
     });
     //vm.q.key=10
-    vm.getTermCommList();
 
+    vm.q.key=11;
+    vm.query();
+    vm.getTermCommList();
 });
 
 var setting = {
@@ -66,7 +68,7 @@ var setting = {
             pIdKey: "parentId",
             rootPId: -1
         },
-        key: {
+        key: { 
             url:"nourl"
         }
     },
@@ -120,7 +122,7 @@ var vm = new Vue({
             vm.displayArea = 3;
             vm.title = "添加工时";
             vm.role = {};
-            vm.getMenuTree( vm.thisTermId );
+            vm.getThisTermInfo( vm.thisTermId );
         },
         getMenuTree: function(termid) {
 		    //alert('getMenuTree:'+termid )
