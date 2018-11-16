@@ -51,6 +51,7 @@ public class MonthteacherController {
     @RequestMapping("/list")
     //@RequiresPermissions("user:monthteacher:list")
     public R list(@RequestParam Map<String, Object> params){
+        System.out.println(" list ...");
         //查询列表数据
         Query query = new Query(params);
 

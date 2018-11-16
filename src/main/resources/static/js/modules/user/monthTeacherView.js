@@ -1,7 +1,7 @@
 $(function () {
     $("#jqGrid").jqGrid({
         url: baseURL + 'user/monthteacher/list',
-        datatype: "json",
+        datatype: "local",
         colModel: [
             { label: '编号', name: 'monthteacherid', index: 'monthteacherid', width: 20, key: true },
 /*            { label: '期数编号', name: 'termid', index: 'termid', width: 80 },*/
@@ -13,7 +13,7 @@ $(function () {
             { label: '课时', name: 'monthteacherclassEntityList', index: 'monthteacherclassEntityList',
                 formatter: function(value, options, row){
                     // alert(value)
-                    console.info(value)
+                    //console.info(value)
                     var strAll='';
                     for(var i=0,l=value.length;i<l;i++){
                        var str =    value[i].classhour
@@ -22,7 +22,7 @@ $(function () {
                         strAll =strAll +value[i].classname + '<span class="label label-success ">'+str+'</span> ';
                     }
                     //var userData=$("#"+options.gid).jqGrid('getGridParam','userData');
-                    console.info('strAll:'+strAll)
+                    //console.info('strAll:'+strAll)
                     return strAll;
                 }
             },
@@ -54,10 +54,12 @@ $(function () {
         }
     });
     //vm.q.key=10
+/**/
 
-    vm.q.key=11;
+
+   vm.getTermCommList();
+    vm.q.key=-99
     vm.query();
-    vm.getTermCommList();
 });
 
 var setting = {
@@ -68,7 +70,7 @@ var setting = {
             pIdKey: "parentId",
             rootPId: -1
         },
-        key: { 
+        key: {
             url:"nourl"
         }
     },
@@ -95,21 +97,43 @@ var vm = new Vue({
 	},
 	methods: {
 		query: function () {
+            //console.info('query  111 ')
+		   // alert('query..')
+           //  vm.getTermCommList();
+           // alert(vm.termCommList[0].termid)
+            //console.info('query  222 ')
+           // console.info('query  111 '+vm.termCommList)
+          //  vm.q.key = vm.termCommList[0].termid;
+
+            //alert(vm.q.key)
+
+
+            vm.getTermClassList(); //获得本期的班级数量（自己选择的）
 			vm.reload();
-            vm.getTermClassList();
+
 		},
         getTermCommList: function(){ //期数下拉框
             $.get(baseURL + "user/term/termCommList/1", function(r){
                 //alert(termCommList)
                 vm.termCommList = r.termCommList;
-                console.info(vm.termCommList);
+                // console.info(vm.termCommList);
+                /*console.info("vm.q.key="+vm.q.key)
+                console.info("vm.termCommList="+vm.termCommList)
+                if(vm.q.key==null){
+                    if(vm.termCommList!=null){
+                        vm.q.key  = vm.termCommList[0].termid;
+                        console.info("vm.q.key="+vm.q.key)
+                    }
+
+                }*/
             });
         },
         getTermClassList: function(){  // 本期班级列表
             $.get(baseURL + "user/monthteacher/termClassList/"+vm.q.key, function(r){
                 //alert(termCommList)
                 vm.termClassList = r.termClassList;
-                console.info(vm.termClassList)
+
+                //console.info(vm.termClassList)
             });
         },
         chooseClass: function(){
@@ -183,16 +207,25 @@ var vm = new Vue({
            return false
         },
 		reload: function (event) {
+		    console.info('reload  111 '+ vm.q.key)
+            //vm.q.key =  vm.q.key
 		    vm.displayArea=1;
 			var page = $("#jqGrid").jqGrid('getGridParam','page');
             vm.thisTermId = vm.q.key
             // alert(vm.thisTermId)
-			$("#jqGrid").jqGrid('setGridParam',{
+			/*$("#jqGrid").jqGrid('setGridParam',{
 				postData:{'key': vm.q.key},
                 page:page
-            }).trigger("reloadGrid");
+            }).trigger("reloadGrid");*/
 
 
-		}
+            $("#jqGrid").jqGrid('setGridParam',{
+                datatype:'json',
+                postData:{'key': vm.q.key},
+                page:page
+            }).trigger('reloadGrid');
+
+
+        }
 	}
 });
