@@ -58,7 +58,7 @@ $(function () {
 
 
    vm.getTermCommList();
-    vm.q.key=-99
+    vm.q.key=11
     vm.query();
 });
 
